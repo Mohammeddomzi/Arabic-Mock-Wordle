@@ -1,0 +1,2 @@
+# Arabic Mock Wordle
+
