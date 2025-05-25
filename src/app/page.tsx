@@ -29,7 +29,7 @@ const ArabicWordle = () => {
 
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const isArabicChar = (char) => {
+  const isArabicChar = (char: string) => {
     return /[\u0600-\u06FF]/.test(char);
   };
 
@@ -43,9 +43,8 @@ const ArabicWordle = () => {
       setMessage("كلمة غير صحيحة");
       return;
     }
-
-    const newGuesses = [...guesses, currentGuess] as string[];
-    setGuesses(newGuesses);
+    const newGuesses = [...guesses, currentGuess];
+    setGuesses(newGuesses as never[]);
     setCurrentGuess("");
     setMessage("");
 
@@ -62,7 +61,7 @@ const ArabicWordle = () => {
 
   // Handle keyboard input
   const handleKeyPress = useCallback(
-    (key) => {
+    (key: string) => {
       if (gameStatus !== "playing") return;
 
       if (key === "Enter") {
@@ -70,21 +69,10 @@ const ArabicWordle = () => {
       } else if (key === "Backspace") {
         setCurrentGuess((prev) => prev.slice(0, -1));
       } else {
-        // Handle both Arabic and English keyboard input
         let arabicChar = "";
         if (isArabicChar(key)) {
           arabicChar = key;
-        } else if (
-          englishToArabicMap[
-            key.toLowerCase() as keyof typeof englishToArabicMap
-          ]
-        ) {
-          arabicChar =
-            englishToArabicMap[
-              key.toLowerCase() as keyof typeof englishToArabicMap
-            ];
         }
-
         if (arabicChar && currentGuess.length < 5) {
           setCurrentGuess((prev) => prev + arabicChar);
         }
@@ -102,7 +90,7 @@ const ArabicWordle = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyPress]);
 
-  const getLetterStatus = (letter, position, word) => {
+  const getLetterStatus = (letter: string, position: number, word: string) => {
     if (!word) return "";
 
     const targetArray = targetWord.split("");
@@ -199,9 +187,8 @@ const ArabicWordle = () => {
               // Get key status based on guesses
               let keyStatus = "";
               for (const guess of guesses) {
-                if (guess.includes(key)) {
-                  const positions = guess
-                    .split("")
+                if (typeof guess === "string") {
+                  const positions = Array.from(guess)
                     .map((char, idx) => ({ char, idx }))
                     .filter((item) => item.char === key);
 
