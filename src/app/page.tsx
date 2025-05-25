@@ -167,13 +167,16 @@ const ArabicWordle = () => {
 
   const renderKeyboard = () => {
     return (
-      <div className="flex flex-col gap-1 sm:gap-2 items-center mt-6 px-2 w-full max-w-lg">
+      <div className="flex flex-col gap-1 items-center mt-6 px-1 w-full">
         {arabicKeys.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex gap-1 justify-center w-full">
-            {rowIndex === 2 && (
+          <div
+            key={rowIndex}
+            className="flex gap-0.5 sm:gap-1 justify-center w-full max-w-xs sm:max-w-lg"
+          >
+            {rowIndex === 0 && (
               <button
                 onClick={() => handleKeyPress("Enter")}
-                className={`px-2 sm:px-3 py-2 sm:py-3 rounded-md text-xs sm:text-sm font-semibold transition-all duration-200 active:scale-95 ${
+                className={`px-1.5 sm:px-3 py-2 sm:py-3 rounded text-xs sm:text-sm font-semibold transition-all duration-200 active:scale-95 ${
                   isDarkMode
                     ? "bg-gray-600 hover:bg-gray-500 text-white active:bg-gray-400"
                     : "bg-gray-300 hover:bg-gray-400 text-gray-900 active:bg-gray-500"
@@ -212,7 +215,7 @@ const ArabicWordle = () => {
                 <button
                   key={key}
                   onClick={() => handleKeyPress(key)}
-                  className={`px-2 sm:px-3 py-2 sm:py-3 rounded-md text-sm sm:text-base font-semibold min-w-[32px] sm:min-w-[40px] transition-all duration-200 active:scale-95 touch-manipulation
+                  className={`px-1.5 sm:px-3 py-2 sm:py-3 rounded text-sm sm:text-base font-semibold min-w-[28px] sm:min-w-[40px] flex-1 max-w-[36px] sm:max-w-[50px] transition-all duration-200 active:scale-95 touch-manipulation
                     ${
                       keyStatus === "correct"
                         ? "bg-green-500 text-white shadow-lg"
@@ -237,7 +240,7 @@ const ArabicWordle = () => {
             {rowIndex === arabicKeys.length - 1 && (
               <button
                 onClick={() => handleKeyPress("Backspace")}
-                className={`px-2 sm:px-3 py-2 sm:py-3 rounded-md text-xs sm:text-sm font-semibold transition-all duration-200 active:scale-95 ${
+                className={`px-1.5 sm:px-3 py-2 sm:py-3 rounded text-xs sm:text-sm font-semibold transition-all duration-200 active:scale-95 ${
                   isDarkMode
                     ? "bg-gray-600 hover:bg-gray-500 text-white active:bg-gray-400"
                     : "bg-gray-300 hover:bg-gray-400 text-gray-900 active:bg-gray-500"
